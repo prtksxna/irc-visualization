@@ -59,7 +59,7 @@ IRCViz = function(options){
 		  .innerRadius(innerRadius)
 		  .outerRadius(outerRadius)
 		 )
-	    .on("mouseover", fade(.1))
+	    .on("mouseover", fade(0))
 	    .on("mouseout", fade(1));
 
 	function fade(opacity) {
