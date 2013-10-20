@@ -5,7 +5,9 @@ IRCViz = function(options){
 	var that = this;
 
 	d3.json(that.options.time, function(e, t){
-	    that.time = t;
+	    that.time = t.sort(function(a, b){
+		return a.hour - b.hour;
+	    });
 	    d3.json(that.options.relations, function(e, r){
 		that.relations = r;
 		d3.json(that.options.frequency, function(e, f){
@@ -20,8 +22,44 @@ IRCViz = function(options){
     this.render = function(){
 	this.nicks = this.frequency.map(function(d){return d.nick;});
 	this.generateMatrix();
-
 	this.renderChord();
+//	this.renderTime();
+    }
+
+    this.renderTime = function(){
+	var that = this;
+
+	var x = d3.scale
+	    .ordinal()
+	    .domain(this.time.map(function(d){
+		return d.hour
+	    }))
+	    .rangeBands([0, $(document).width()], 0.90);
+
+	var y = d3.scale.linear().domain(
+	    [
+		0,
+		d3.max(this.time.map(function(d){
+		    return d.messages;
+		}))
+	    ]
+	).range([0, 100]);
+
+	var svg = d3.select(this.options.selection).append("svg").attr("class", "time-bar");
+
+	svg.selectAll("rect").data(that.time).enter()
+	    .append("rect")
+	    .attr("height", function(d){
+		console.log(d);
+		return y(d.messages);
+	    })
+	    .attr("x", function(d){
+		return x(d.hour);
+	    })
+	    .attr("width", x.rangeBand())
+	    .attr("y",0)
+	    .style("fill", "#F71967");
+
     }
 
     this.renderChord = function(){
@@ -31,6 +69,7 @@ IRCViz = function(options){
 
 	var svg = d3.select(this.options.selection)
 	    .append("svg")
+	    .attr("class", "chord")
 	    .attr("width", w)
 	    .attr("height", h)
 	    .append("g")
@@ -102,17 +141,17 @@ IRCViz = function(options){
 		return d.angle > Math.PI ? "rotate(180)translate(-16)" : null;
 	    })
 	    .text(function(d) {
-		console.log(d);
 		return that.nicks[d.index];
 	    });
 
 
     }
 
+
+    // Data helpers
     this.generateMatrix = function(){
 	var that = this;
 	var matrix = [];
-
 	function populateMatrix(){
 	    for(var i = 0; i < that.nicks.length; i++){
 		matrix[i] = [];
@@ -121,9 +160,7 @@ IRCViz = function(options){
 		}
 	    }
 	}
-
 	populateMatrix();
-
 	for(i in this.relations){
 	    var r = this.relations[i];
 	    if( that.nicks.indexOf(r.from) == that.nicks.indexOf(r.to)) continue;

@@ -1,8 +1,19 @@
 body{
     background: #5A436F;
+background: #5a436f; /* Old browsers */
+background: -moz-linear-gradient(top, #5a436f 0%, #7068a8 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5a436f), color-stop(100%,#7068a8)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #5a436f 0%,#7068a8 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #5a436f 0%,#7068a8 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #5a436f 0%,#7068a8 100%); /* IE10+ */
+background: linear-gradient(to bottom, #5a436f 0%,#7068a8 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5a436f', endColorstr='#7068a8',GradientType=0 ); /* IE6-9 */
     color: #53DBD6;
     font: 10px 'Roboto';
     font-weight: 800;
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
 }
 
 #links{
@@ -33,7 +44,17 @@ body{
     color: #f71967;
 }
 
+
 #chart{
+    margin: 0;
+    padding: 0;
+    background: url('bg.png');
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#chart svg.chord{
     margin: 0 auto;
     -webkit-animation-name: spin;
     -webkit-animation-duration: 320000ms;
@@ -72,4 +93,9 @@ body{
 @keyframes spin {
     from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
+}
+
+#chart svg{
+    padding: 0;
+    margin: 0;
 }
