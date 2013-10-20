@@ -26,9 +26,9 @@ body{
 
 #links h1 a{
     text-decoration: none;
-    color: #53DBD6;
+    color: #fff;
     font-family: 'Monaco', 'Menlo', 'Courier New', 'Courier', monospace;
-    font-size: 30px;
+    font-size: 20px;
     margin: 0;
     padding:0;
 }
@@ -36,13 +36,13 @@ body{
 #links p{
     padding:0;
     margin: 0;
-    margin-top: -20px;
-    color: #f71967;
-    font-size: 18px;
+    margin-top: -10px;
+    color: #fff;
+    font-size: 10px;
 }
 
 #links p a{
-    color: #f71967;
+    color: #53DBD6;
 }
 
 
