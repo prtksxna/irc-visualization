@@ -10,7 +10,7 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5a436f', endColorstr='#7068a8',GradientType=0 ); /* IE6-9 */
     color: #53DBD6;
     font-family: 'Monaco', 'Menlo', 'Courier New', 'Courier', monospace;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     margin: 0;
     padding: 0;
@@ -79,7 +79,7 @@ body{
 #chart text{
     fill: #53DBD6;
     font-family: 'Monaco', 'Menlo', 'Courier New', 'Courier', monospace;
-    font: 11px;
+    font: 12px;
     font-weight: 100;
 }
 
